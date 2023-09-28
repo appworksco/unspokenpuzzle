@@ -1,0 +1,20 @@
+Admin
+- Book Module 
+	- Add Book
+	- Update Books
+	- Delete Books
+- Payment Module
+	- View Payment
+
+User
+- Book Module
+	- View Book
+- Payment Module 
+	- Add Payment
+
+Inclusion
+- Free domain registration
+- Free 1 year Hosting Plan
+- Free 3 months support
+
+Price 15k
