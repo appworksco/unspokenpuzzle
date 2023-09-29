@@ -26,7 +26,6 @@
 
   if (isset($_POST["buy"])) {
     $userId = $_POST["user_id"];
-    $bookId = $_POST["book_id"];
     $wallet = $_POST["wallet"];
     $price = $_POST["price"];
 
@@ -36,11 +35,8 @@
       $updateWallet = $userfacade->updateWallet($userId, $amount);
       if ($updateWallet) {
         // Add book to user
-        $addPurchasedBookById = $purchasedBookFacade->addPurchasedBookByUserId($userId, $bookId);
-        if ($addPurchasedBookById) {
-          $msg = 'The book has been successfully bought. You can now start reading it on "My Books".';
-          array_push($success, $msg);
-        }
+        $msg = 'The book has been successfully bought. You can now start reading it on "My Books".';
+        array_push($success, $msg);
       }
     } else {
       $msg = 'You do not have enough funds in your wallet. Deposit now through Gcash to continue the transaction.';
@@ -99,70 +95,45 @@
       </nav>
     </header>
 
-    <div class="site-hero">
-      <div class="container">
-        <h1 class="display-5 text-white">Reading is essential for those who seek to rise above the ordinary.</h1>
-        <small class="text-white">- Jim Rohn</small>
-        <!-- <div class="owl-carousel">
-          <div><p>asdasd</p></div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-        </div> -->
-      </div>
-    </div>
-
     <div class="site-suggestions">
-      <div class="container">
-        <h1 class="h3 text-uppercase text-white py-3">Suggestions</h1>
+      <div class="container py-5">
+        <h1 class="h3 text-uppercase text-white py-3">My Books</h1>
         <?php include('errors.php'); ?>
         <div class="row">
           <?php
-          $books = $bookFacade->fetchBooks()->fetchAll();
-          foreach($books as $book) { ?>
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <div class="card">
-              <form action="index.php" method="post">
-                <div class="card-body p-0">
-                  <img src="<?= $book["book_image"] ?>" class="w-100 mb-3" alt="user" />
-                  <div class="px-3">
-                    <h4 class="m-b-0"><?= $book["book_name"] ?></h4>
-                    <span class="text-muted">Price: <?= $book["price"] ?></span>
-                  </div>
-                  <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                          Synopsis
-                        </button>
-                      </h2>
-                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body"><?= $book["description"] ?></div>
+
+          $booksId = $purchasedBookFacade->fetchBookById($userId);
+          foreach($booksId as $bookId) { 
+            $bookId = $bookId["book_id"];
+            $books = $bookFacade->fetchBookById($bookId)->fetchAll();
+            foreach($books as $book) { ?>
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                  <div class="card-body p-0">
+                    <img src="<?= $book["book_image"] ?>" class="w-100 mb-3" alt="user" />
+                    <div class="px-3">
+                      <h4 class="m-b-0"><?= $book["book_name"] ?></h4>
+                      <span class="text-muted">Price: <?= $book["price"] ?></span>
+                    </div>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Synopsis
+                          </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body"><?= $book["description"] ?></div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-footer mt-2 p-0">
-                  <div class="d-flex">
-                    <input type="hidden" value="<?= $userId ?>" name="user_id">
-                    <?php 
-                      $users = $userfacade->fetchUsersById($userId);
-                      foreach($users as $user) { ?>
-                        <input type="hidden" value="<?= $user["wallet"] ?>" name="wallet">
-                    <?php } ?>
-                    <input type="hidden" value="<?= $book["id"] ?>" name="book_id">
-                    <input type="hidden" value="<?= $book["price"] ?>" name="price">
-                    <a class="btn btn-info w-100" href="<?= $book["book_image"] ?>"><i class="mdi mdi-magnify-plus"></i> View</a>
-                    <button type="submit" class="btn btn-success w-100" name="buy"><i class="mdi mdi-link"></i> Buy</button>
+                  <div class="card-footer mt-2 p-0">
+                    <a class="btn btn-info w-100" href="read.php?book_id=<?= $book["id"] ?>"><i class="mdi mdi-magnify-plus"></i> Read</a>
                   </div>
                 </div>
-              </form>
-            </div>
-          </div>
-          <?php } ?>
+              </div>
+          <?php } } ?>
         </div>
       </div>
     </div>

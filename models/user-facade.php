@@ -8,6 +8,12 @@
       return $sql;
     }
 
+    public function fetchUsersById($userId) {
+      $sql = $this->connect()->prepare("SELECT * FROM users WHERE id = ?");
+      $sql->execute([$userId]);
+      return $sql;
+    }
+
     public function verifyUsernameAndPassword($username, $password) {
       $sql = $this->connect()->prepare("SELECT username, password FROM users WHERE username = ? AND password = ?");
       $sql->execute([$username, $password]);
@@ -44,7 +50,7 @@
       $sql->execute();
       return $sql;
     }
-    
+
   }
 
 ?>

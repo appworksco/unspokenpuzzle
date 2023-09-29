@@ -64,6 +64,12 @@
       return $sql;
     }
 
+    public function addPurchasedBookByUserId($userId, $bookId) {
+      $sql = $this->connect()->prepare("INSERT INTO p(book_file, book_image, book_name, description, price) VALUES (?, ?, ?, ?, ?)");
+      $sql->execute([$bookFile, $bookImage, $bookName, $description, $price]);
+      return $sql;
+    }
+
   }
 
 ?>

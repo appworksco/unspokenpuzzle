@@ -30,6 +30,7 @@
           } else {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['full_name'] = $row['full_name'];
+            $_SESSION['wallet'] = $row['wallet'];
             header('Location: index.php');
           }
         }

@@ -21,10 +21,13 @@ $info = array();
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
   <title>Unspoken Puzzle</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- User links -->
   <link href="./assets/libs/flot/css/float-chart.css" rel="stylesheet">
   <link href="./dist/css/custom-style.css" rel="stylesheet">
   <link href="./dist/css/style.min.css" rel="stylesheet">
+  <link href="./dist/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="./dist/css/owl.theme.default.min.css" rel="stylesheet">
   <!-- Admin links -->
   <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet">
   <link href="../assets/extra-libs/multicheck/multicheck.css" rel="stylesheet">

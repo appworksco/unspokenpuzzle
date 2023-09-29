@@ -12,3 +12,18 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
 }
+.bg-primary-dark {
+    background-color: #5b47da;
+}
+.site-hero {
+    background-image: url('../../assets/images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: calc(100vh - 300px);
+   
+}
