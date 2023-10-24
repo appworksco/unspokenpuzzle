@@ -44,31 +44,31 @@
               <div class="col-12">
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="ti-user"></i></span>
+                    <span class="input-group-text bg-custom-dark text-white"><i class="ti-user"></i></span>
                   </div>
                   <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" required="" name="email">
                 </div>
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="ti-user"></i></span>
+                    <span class="input-group-text bg-custom-dark text-white"><i class="ti-user"></i></span>
                   </div>
                   <input type="text" class="form-control form-control-lg" placeholder="Full Name" aria-label="Full Name" aria-describedby="basic-addon2" required="" name="full_name">
                 </div>
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="ti-user"></i></span>
+                    <span class="input-group-text bg-custom-dark text-white"><i class="ti-user"></i></span>
                   </div>
                   <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon3" required="" name="username">
                 </div>
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="ti-pencil"></i></span>
+                    <span class="input-group-text bg-custom-dark text-white"><i class="ti-pencil"></i></span>
                   </div>
                   <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon4" required="" name="password">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="ti-pencil"></i></span>
+                    <span class="input-group-text bg-custom-dark text-white"><i class="ti-pencil"></i></span>
                   </div>
                   <input type="password" class="form-control form-control-lg" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="basic-addon5" required="" name="confirm_password">
                 </div>
@@ -78,7 +78,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <div class="p-t-20">
-                    <button type="submit" class="btn btn-primary mb-1 w-100" name="register">Register</button>
+                    <button type="submit" class="btn bg-custom-dark text-white mb-1 w-100" name="register">Register</button>
                     <small>Already had an account? <a href="login.php">Login</a></small><br>
                     <small>Powered By: <a href="https://www.appworksco.com" target="blank">Appworks Co.</a></small>
                   </div>

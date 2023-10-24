@@ -6,12 +6,13 @@
 
   $bookFacade = new BookFacade;
 
-  if (isset($_GET["msg"])) {
-    $msg = $_GET["msg"];
-    array_push($success, $msg);
-  }
-
   $userId = 0;
+  if (isset($_GET["book_id"])) {
+    $bookId = $_GET["book_id"];
+  }
+  if (isset($_GET["description"])) {
+    $description = $_GET["description"];
+  }
   if (isset($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"];
   }
@@ -21,6 +22,16 @@
   if ($userId == 0) {
     header('Location: login.php');
   }
+
+  if (isset($_POST["update"])) {
+    $bookId = $_POST["book_id"];
+    $description = $_POST["description"];
+
+      $updateDesc = $bookFacade->updateDesc($bookId, $description);
+      if ($updateDesc) {
+        header("Location: books.php");
+      }
+    }
 
 ?>
 
@@ -65,12 +76,13 @@
       <div class="page-breadcrumb">
       <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-          <h4 class="page-title">Books</h4>
+          <h4 class="page-title">Update Description</h4>
           <div class="ml-auto text-right">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Books</li>
+                <li class="breadcrumb-item">Books</li>
+                <li class="breadcrumb-item active" aria-current="page">Add Book</li>
               </ol>
             </nav>
           </div>
@@ -81,39 +93,26 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between py-3">
-                <h4 class="card-title">Information</h4>
-                <a href="add-book.php" class="btn btn-primary">Add Book</a>
+            <form class="form-horizontal" action="update-book.php" method="post" enctype="multipart/form-data">
+              <div class="card-body">
+                <div class="d-flex justify-content-between py-3">
+                  <h4 class="card-title">Information</h4>
+                </div>
+                <?php include('../errors.php'); ?>
+                <div class="form-group row">
+                  <label for="description" class="col-sm-2 text-right control-label col-form-label">Description</label>
+                  <div class="col-sm-10">
+                    <input type="hidden" valuse="<?= $bookId ?>" name="book_id">
+                    <textarea class="w-100 p-2" id="description" placeholder="Description Here" name="description" style="height: 130px"><?= $description ?></textarea>
+                  </div>
+                </div>
               </div>
-              <div class="table-responsive">
-                <table id="zero_config" class="table table-striped table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Book Name</th>
-                      <th>Description</th>
-                      <th>Price</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $books = $bookFacade->fetchBooks()->fetchAll();
-                    foreach($books as $book) { ?>
-                    <tr>
-                      <td><?= $book["book_name"] ?></td>
-                      <td><?= $book["description"] ?></td>
-                      <td><?= $book["price"] ?></td>
-                      <td>
-                        <a href="update-book.php?book_id=<?= $book["id"] ?>&description=<?= $book["description"] ?>" class="btn btn-info">Update Description</a>
-                        <a href="delete-book.php?book_id=<?= $book["id"] ?>&book_file=<?= $book["book_file"] ?>&book_image=<?= $book["book_image"] ?>" class="btn btn-danger">Delete</a>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                  </tbody>
-                </table>
+              <div class="border-top">
+                <div class="card-body">
+                  <button type="submit" class="btn btn-primary" name="update">Update</button>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

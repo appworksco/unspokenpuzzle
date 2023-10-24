@@ -56,7 +56,7 @@
       <div class="lds-pos"></div>
     </div>
   </div>
-  <div class="main-wrapper bg-primary">
+  <div class="main-wrapper">
     <header class="site-header">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -99,25 +99,59 @@
       </nav>
     </header>
 
-    <div class="site-hero">
+    <div class="site-hero pt-4">
       <div class="container">
-        <h1 class="display-5 text-white">Reading is essential for those who seek to rise above the ordinary.</h1>
-        <small class="text-white">- Jim Rohn</small>
-        <!-- <div class="owl-carousel">
-          <div><p>asdasd</p></div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-        </div> -->
+        <form action="index.php" method="post">
+          <div class="owl-carousel">
+            <?php
+              $books = $bookFacade->fetchBooks()->fetchAll();
+              foreach($books as $book) { ?>
+              <div>
+                <input type="hidden" value="<?= $userId ?>" name="user_id">
+                <?php 
+                  $users = $userfacade->fetchUsersById($userId);
+                  foreach($users as $user) { ?>
+                    <input type="hidden" value="<?= $user["wallet"] ?>" name="wallet">
+                <?php } ?>
+                <input type="hidden" value="<?= $book["id"] ?>" name="book_id">
+                <input type="hidden" value="<?= $book["price"] ?>" name="price">
+                <h1 class="text-start text-light m-b-0 p-4"><?= $book["book_name"] ?></h1>
+                <p class="lead text-start text-light p-4"><?= substr($book["description"], 0, 100) ?></p>
+                <div class="px-3">
+                  <button type="submit" class="btn btn-secondary w-100" name="buy">Buy Now</button>
+                </div>
+              </div>
+              <img src="<?= $book["book_image"] ?>" class="pb-4" alt="user" style="height: 300px"/>
+            <?php } ?>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="site-new-release bg-black py-5">
+      <div class="container py-5">
+        <h1 class="text-center text-light py-4">New Release</h1>
+        <?php
+          $books = $bookFacade->fetchNewRelease()->fetchAll();
+          foreach($books as $book) { ?>
+            <div class="row">
+              <div class="col-lg-6">
+                <img src="<?= $book['book_image'] ?>" class="w-100" alt="">
+              </div>
+              <div class="col-lg-6 d-flex align-items-center">
+                <div>
+                  <h3 class="text-light"><?= $book['book_name'] ?></h3>
+                  <p><?= $book['description'] ?></p>
+                </div>
+              </div>
+            </div>
+        <?php } ?>
       </div>
     </div>
 
     <div class="site-suggestions">
       <div class="container">
-        <h1 class="h3 text-uppercase text-white py-3">Suggestions</h1>
+        <h1 class="h3 text-uppercase text-light py-3">Suggestions</h1>
         <?php include('errors.php'); ?>
         <div class="row">
           <?php
@@ -127,7 +161,7 @@
             <div class="card">
               <form action="index.php" method="post">
                 <div class="card-body p-0">
-                  <img src="<?= $book["book_image"] ?>" class="w-100 mb-3" alt="user" />
+                  <img src="<?= $book["book_image"] ?>" class="w-100 mb-3" alt="user" style="height: 250px"/>
                   <div class="px-3">
                     <h4 class="m-b-0"><?= $book["book_name"] ?></h4>
                     <span class="text-muted">Price: <?= $book["price"] ?></span>
@@ -135,11 +169,11 @@
                   <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                       <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<?= '#' . $book["book_name"] ?>" aria-expanded="false" aria-controls="flush-collapseOne">
                           Synopsis
                         </button>
                       </h2>
-                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                      <div id="<?= $book["book_name"] ?>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body"><?= $book["description"] ?></div>
                       </div>
                     </div>
@@ -167,11 +201,11 @@
       </div>
     </div>
 
-    <div class="site-footer bg-primary-dark">
+    <div class="site-footer">
       <div class="container py-3">
         <div class="d-lg-flex justify-content-between">
           <p class="text-light m-0">Copyright &copy; 2023 Unspoken Puzzle. All Rights Reserved</p>
-          <p class="text-light m-0">Powered By: <a href="https://www.appworksco.com/" class="text-warning" target="_blank">Appworks Co.</a></p>
+          <p class="text-light m-0">Powered By: <a href="https://www.appworksco.com/" class="text-decoration-none" target="_blank">Appworks Co.</a></p>
         </div>
       </div>
     </div>

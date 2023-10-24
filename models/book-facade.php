@@ -8,6 +8,12 @@
       return $sql;
     }
 
+    public function fetchNewRelease() {
+      $sql = $this->connect()->prepare("SELECT * FROM books ORDER BY id DESC LIMIT 1");
+      $sql->execute();
+      return $sql;
+    }
+
     public function fetchBookById($bookId) {
       $sql = $this->connect()->prepare("SELECT * FROM books WHERE id = '$bookId'");
       $sql->execute();
@@ -28,9 +34,9 @@
       return $count;
     }
 
-    public function addBook($bookFile, $bookImage, $bookName, $description, $price) {
-      $sql = $this->connect()->prepare("INSERT INTO books(book_file, book_image, book_name, description, price) VALUES (?, ?, ?, ?, ?)");
-      $sql->execute([$bookFile, $bookImage, $bookName, $description, $price]);
+    public function addBook($bookImage, $bookName, $description, $price) {
+      $sql = $this->connect()->prepare("INSERT INTO books(book_image, book_name, description, price) VALUES (?, ?, ?, ?)");
+      $sql->execute([$bookImage, $bookName, $description, $price]);
       return $sql;
     }
 
@@ -46,8 +52,8 @@
       return $sql;
     }
 
-    public function isLoggedIn($userId) {
-      $sql = $this->connect()->prepare("UPDATE user SET is_logged_in = 1 WHERE id = $userId");
+    public function updateDesc($bookId, $description) {
+      $sql = $this->connect()->prepare("UPDATE books SET description = '$description' WHERE id = $bookId");
       $sql->execute();
       return $sql;
     }

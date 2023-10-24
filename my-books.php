@@ -52,7 +52,7 @@
       <div class="lds-pos"></div>
     </div>
   </div>
-  <div class="main-wrapper bg-primary">
+  <div class="main-wrapper bg-custom-dark">
     <header class="site-header">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -138,11 +138,11 @@
       </div>
     </div>
 
-    <div class="site-footer bg-primary-dark">
+    <div class="site-footer bg-custom-dark">
       <div class="container py-3">
         <div class="d-lg-flex justify-content-between">
           <p class="text-light m-0">Copyright &copy; 2023 Unspoken Puzzle. All Rights Reserved</p>
-          <p class="text-light m-0">Powered By: <a href="https://www.appworksco.com/" class="text-warning" target="_blank">Appworks Co.</a></p>
+          <p class="text-light m-0">Powered By: <a href="https://www.appworksco.com/" class="text-decoration-none" target="_blank">Appworks Co.</a></p>
         </div>
       </div>
     </div>

@@ -39,12 +39,34 @@
 	<script src="../dist/js/pages/chart/chart-page-init.js"></script>
 	<script>
     $(document).ready(function(){
-      $('#zero_config').DataTable();
-      $(".owl-carousel").owlCarousel({
-        loop:true,
-        items: 1,
-      });
-    });    
-  </script>
+		$(".owl-carousel").owlCarousel({
+			loop:true,
+			items: 1,
+			navText: "",
+			responsiveClass:true,
+			responsive:{
+				0:{
+					items:2,
+					nav:true
+				},
+				600:{
+					items:2,
+					nav:true
+				},
+				1000:{
+					items:2,
+					nav:true,
+					loop:true
+				}
+			}
+		});
+		$('#zero_config').DataTable(); 
+	}); 
+	</script>
+	<script>
+    $(document).ready(function(){
+		$('#zero_config').DataTable(); 
+	}); 
+	</script>
 </body>
 </html>

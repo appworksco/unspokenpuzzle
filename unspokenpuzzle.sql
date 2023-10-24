@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2023 at 08:55 AM
+-- Generation Time: Oct 24, 2023 at 10:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,26 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `book_file`, `book_image`, `book_name`, `description`, `price`) VALUES
-(7, './assets/book-files/64f9237a18f6c7.30171298.txt', './assets/book-images/64f9237a18f3c8.77521984.jpg', 'New Book', 'New Book Description', 50);
+(11, '', './assets/book-images/652d463a6744c3.69992724.png', 'New Book', 'asdasdasd sdasdasd', 150);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchased_books`
+--
+
+CREATE TABLE `purchased_books` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `purchased_books`
+--
+
+INSERT INTO `purchased_books` (`id`, `user_id`, `book_id`) VALUES
+(2, 5, 8);
 
 -- --------------------------------------------------------
 
@@ -65,7 +84,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `user_type`, `email`, `full_name`, `username`, `password`, `wallet`) VALUES
 (2, 0, '', 'Administrator', 'admin', 'admin', 0),
-(5, 1, 'test@gmail.com', 'Test', 'Test', 'test', 500);
+(5, 1, 'test@gmail.com', 'Test', 'Test', 'test', 140);
 
 --
 -- Indexes for dumped tables
@@ -75,6 +94,12 @@ INSERT INTO `users` (`id`, `user_type`, `email`, `full_name`, `username`, `passw
 -- Indexes for table `books`
 --
 ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchased_books`
+--
+ALTER TABLE `purchased_books`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -91,7 +116,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `purchased_books`
+--
+ALTER TABLE `purchased_books`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

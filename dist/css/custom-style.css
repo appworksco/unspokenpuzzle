@@ -1,4 +1,5 @@
 body {
+    background-image: url('../.././assets/images/bg-1.jpg') !important;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -6,24 +7,24 @@ body {
     user-select: none;
 }
 .bg-space {
-    background-image: url('../../assets/images/bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #333;
     height: 100vh;
 }
-.bg-primary-dark {
-    background-color: #5b47da;
+.bg-black {
+    background-color: #000;
+}
+.bg-custom-dark {
+    background-color: #333 !important;
 }
 .site-hero {
-    background-image: url('../../assets/images/bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     height: calc(100vh - 300px);
-   
+}
+@media (max-width: 575.98px) {
+    .site-hero {
+        height: calc(100vh - 250px);
+    }
 }

@@ -31,7 +31,7 @@
     </div>
   </div>
   <div id="main-wrapper">
-    <header class="topbar bg-primary">
+    <header class="topbar bg-custom-dark">
       <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header">
           <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
@@ -50,7 +50,7 @@
         </div>
       </nav>
     </header>
-    <aside class="left-sidebar bg-primary">
+    <aside class="left-sidebar bg-custom-dark">
       <div class="scroll-sidebar">
         <nav class="sidebar-nav">
           <ul id="sidebarnav" class="p-t-30">

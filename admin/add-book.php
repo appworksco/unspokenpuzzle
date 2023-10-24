@@ -18,16 +18,6 @@
   }
 
   if (isset($_POST["add_book"])) {
-    $bookFile = $_FILES["book_file"];
-		$bookFileName = $_FILES["book_file"]["name"];
-		$bookFileTmpName = $_FILES["book_file"]["tmp_name"];
-		$bookFileSize = $_FILES["book_file"]["size"];
-		$bookFileError = $_FILES["book_file"]["error"];
-		$bookFileType = $_FILES["book_file"]["type"];
-		$bookFileExt = explode('.', $bookFileName);
-		$bookFileActualExt = strtolower(end($bookFileExt));
-    $bookAllowed = array('docs');
-
     $file = $_FILES["book_image"];
 		$fileName = $_FILES["book_image"]["name"];
 		$fileTmpName = $_FILES["book_image"]["tmp_name"];
@@ -41,9 +31,7 @@
     $description = $_POST["description"];
     $price = $_POST["price"];
 
-    if (empty($bookFileTmpName)) {
-      array_push($invalid, "Book image should not be empty!");
-    } if (empty($fileTmpName)) {
+    if (empty($fileTmpName)) {
       array_push($invalid, "Book image should not be empty!");
     } if (empty($bookName)) {
       array_push($invalid, 'Book Name should not be empty!');
@@ -62,14 +50,10 @@
 					if ($fileSize > 5000) {
 						$fileNameNew = uniqid('', true) . "." . $fileActualExt;
 						$fileDestination = '../assets/book-images/' . $fileNameNew;
-            $bookFileNameNew = uniqid('', true) . "." . $bookFileActualExt;
-						$bookFileDestination = '../assets/book-files/' . $bookFileNameNew;
 						move_uploaded_file($fileTmpName, $fileDestination);
-            move_uploaded_file($bookFileTmpName, $bookFileDestination);
 						// Insert Data To Database
-            $bookFile = './assets/book-files/' . $bookFileNameNew;
 						$bookImage = './assets/book-images/' . $fileNameNew;
-            $addBook = $bookFacade->addBook($bookFile, $bookImage, $bookName, $description, $price);
+            $addBook = $bookFacade->addBook($bookImage, $bookName, $description, $price);
 						if ($addBook) {
 							array_push($success, "Book added successfully!");
 						} else {
@@ -93,7 +77,7 @@
     </div>
   </div>
   <div id="main-wrapper">
-    <header class="topbar bg-primary">
+    <header class="topbar bg-custom-dark">
       <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header">
           <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
@@ -112,7 +96,7 @@
         </div>
       </nav>
     </header>
-    <aside class="left-sidebar bg-primary">
+    <aside class="left-sidebar bg-custom-dark">
       <div class="scroll-sidebar">
         <nav class="sidebar-nav">
           <ul id="sidebarnav" class="p-t-30">
@@ -150,12 +134,6 @@
                   <h4 class="card-title">Information</h4>
                 </div>
                 <?php include('../errors.php'); ?>
-                <div class="form-group row">
-                  <label for="bookFile" class="col-sm-2 text-right control-label col-form-label">Book File</label>
-                  <div class="col-sm-10">
-                    <input type="file" class="form-control" id="bookFile" name="book_file">
-                  </div>
-                </div>
                 <div class="form-group row">
                   <label for="bookImage" class="col-sm-2 text-right control-label col-form-label">Book Image</label>
                   <div class="col-sm-10">

@@ -60,13 +60,13 @@
               <div class="col-12">
                 <div class="input-group mb-1">
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="ti-user"></i></span>
+                    <span class="input-group-text bg-custom-dark text-white"><i class="ti-user"></i></span>
                   </div>
                   <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="username">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text bg-primary text-white"><i class="ti-pencil"></i></span>
+                    <span class="input-group-text bg-custom-dark text-white"><i class="ti-pencil"></i></span>
                   </div>
                   <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">
                 </div>
@@ -76,7 +76,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <div class="p-t-20">
-                    <button type="submit" class="btn btn-primary mb-1 w-100" name="login">Login</button>
+                    <button type="submit" class="btn bg-custom-dark text-white mb-1 w-100" name="login">Login</button>
                     <small>Don't have an account? <a href="register.php">Register</a></small><br>
                     <small>Powered By: <a href="https://www.appworksco.com" target="blank">Appworks Co.</a></small>
                   </div>
