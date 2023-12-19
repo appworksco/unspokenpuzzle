@@ -15,8 +15,8 @@
     }
 
     public function fetchBookById($bookId) {
-      $sql = $this->connect()->prepare("SELECT * FROM books WHERE id = '$bookId'");
-      $sql->execute();
+      $sql = $this->connect()->prepare("SELECT * FROM books WHERE id = ?");
+      $sql->execute([$bookId]);
       return $sql;
     }
 
@@ -52,8 +52,8 @@
       return $sql;
     }
 
-    public function updateDesc($bookId, $description) {
-      $sql = $this->connect()->prepare("UPDATE books SET description = '$description' WHERE id = $bookId");
+    public function updateBook($bookId, $bookName, $description, $price) {
+      $sql = $this->connect()->prepare("UPDATE books SET book_name = '$bookName', description = '$description', price = '$price' WHERE id = $bookId");
       $sql->execute();
       return $sql;
     }
@@ -70,7 +70,7 @@
       return $sql;
     }
 
-    public function addPurchasedBookByUserId($userId, $bookId) {
+    public function addPurchasedBookByUserId($bookFile, $bookImage, $bookName, $description, $price) {
       $sql = $this->connect()->prepare("INSERT INTO p(book_file, book_image, book_name, description, price) VALUES (?, ?, ?, ?, ?)");
       $sql->execute([$bookFile, $bookImage, $bookName, $description, $price]);
       return $sql;

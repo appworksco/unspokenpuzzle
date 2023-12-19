@@ -2,7 +2,7 @@
 
   include('../db/connector.php');
   include('../models/book-facade.php');
-  include('../layout/header.php');
+  include('../layout/dashboard-header.php');
 
   $bookFacade = new BookFacade;
 
@@ -57,6 +57,11 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
+          </ul>
+          <p class="ms-4 mt-4 text-light">Settings</p>
+          <ul id="sidebarnav">
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="banner.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Banner</span></a></li>
           </ul>
         </nav>
       </div>
@@ -86,10 +91,12 @@
                 <h4 class="card-title">Information</h4>
                 <a href="add-book.php" class="btn btn-primary">Add Book</a>
               </div>
+              <?php include('../errors.php'); ?>
               <div class="table-responsive">
                 <table id="zero_config" class="table table-striped table-bordered">
                   <thead>
                     <tr>
+                      <th>Book Image</th>
                       <th>Book Name</th>
                       <th>Description</th>
                       <th>Price</th>
@@ -101,12 +108,13 @@
                     $books = $bookFacade->fetchBooks()->fetchAll();
                     foreach($books as $book) { ?>
                     <tr>
+                      <td><img src="<?= '../' . $book["book_image"] ?>" alt="Book Image" style="height: 100px"></td>
                       <td><?= $book["book_name"] ?></td>
                       <td><?= $book["description"] ?></td>
                       <td><?= $book["price"] ?></td>
                       <td>
-                        <a href="update-book.php?book_id=<?= $book["id"] ?>&description=<?= $book["description"] ?>" class="btn btn-info">Update Description</a>
-                        <a href="delete-book.php?book_id=<?= $book["id"] ?>&book_file=<?= $book["book_file"] ?>&book_image=<?= $book["book_image"] ?>" class="btn btn-danger">Delete</a>
+                        <a href="update-book.php?book_id=<?= $book["id"] ?>" class="btn btn-info">Update</a>
+                        <a href="delete-book.php?book_id=<?= $book["id"] ?>&book_image=<?= $book["book_image"] ?>" class="btn btn-danger">Delete</a>
                       </td>
                     </tr>
                     <?php } ?>
@@ -124,5 +132,5 @@
   </div>
 
 <?php
-    include('../layout/footer.php');
+    include('../layout/dashboard-footer.php');
 ?>

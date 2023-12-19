@@ -2,7 +2,7 @@
 
   include('../db/connector.php');
   include('../models/book-facade.php');
-  include('../layout/header.php');
+  include('../layout/dashboard-header.php');
 
   $bookFacade = new BookFacade;
 
@@ -25,10 +25,12 @@
 
   if (isset($_POST["update"])) {
     $bookId = $_POST["book_id"];
+    $bookName = $_POST["book_name"];
     $description = $_POST["description"];
+    $price = $_POST["price"];
 
-      $updateDesc = $bookFacade->updateDesc($bookId, $description);
-      if ($updateDesc) {
+      $updateBook = $bookFacade->updateBook($bookId, $bookName, $description, $price);
+      if ($updateBook) {
         header("Location: books.php");
       }
     }
@@ -68,6 +70,11 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
+          </ul>
+          <p class="ms-4 mt-4 text-light">Settings</p>
+          <ul id="sidebarnav">
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="banner.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Banner</span></a></li>
           </ul>
         </nav>
       </div>
@@ -76,13 +83,13 @@
       <div class="page-breadcrumb">
       <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-          <h4 class="page-title">Update Description</h4>
+          <h4 class="page-title">Update</h4>
           <div class="ml-auto text-right">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item">Books</li>
-                <li class="breadcrumb-item active" aria-current="page">Add Book</li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="books.php">Books</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Update</li>
               </ol>
             </nav>
           </div>
@@ -98,20 +105,36 @@
                 <div class="d-flex justify-content-between py-3">
                   <h4 class="card-title">Information</h4>
                 </div>
-                <?php include('../errors.php'); ?>
+                <?php include('../errors.php');
+                $fetchUBookById = $bookFacade->fetchBookById($bookId) ;
+                while ($row = $fetchUBookById->fetch(PDO::FETCH_ASSOC)) { ?>
+                <div class="form-group row">
+                  <label for="bookName" class="col-sm-2 text-right control-label col-form-label">Book Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="bookName" placeholder="Book Name Here" name="book_name" value="<?= $row["book_name"] ?>">
+                  </div>
+                </div>
                 <div class="form-group row">
                   <label for="description" class="col-sm-2 text-right control-label col-form-label">Description</label>
                   <div class="col-sm-10">
-                    <input type="hidden" valuse="<?= $bookId ?>" name="book_id">
-                    <textarea class="w-100 p-2" id="description" placeholder="Description Here" name="description" style="height: 130px"><?= $description ?></textarea>
+                    <input type="hidden" value="" name="book_id">
+                    <textarea class="w-100 p-2" id="description" placeholder="Description Here" name="description" style="height: 130px"><?= $row["description"] ?></textarea>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="price" class="col-sm-2 text-right control-label col-form-label">Price</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" id="price" placeholder="Price Here" name="price" value="<?= $row["price"] ?>">
                   </div>
                 </div>
               </div>
               <div class="border-top">
                 <div class="card-body">
+                  <input type="hidden" value="<?= $bookId ?>" name="book_id">
                   <button type="submit" class="btn btn-primary" name="update">Update</button>
                 </div>
               </div>
+              <?php } ?>
             </form>
           </div>
         </div>
@@ -123,5 +146,5 @@
   </div>
 
 <?php
-    include('../layout/footer.php');
+    include('../layout/dashboard-footer.php');
 ?>

@@ -52,11 +52,11 @@
       <div class="lds-pos"></div>
     </div>
   </div>
-  <div class="main-wrapper bg-custom-dark">
-    <header class="site-header">
+  <div class="main-wrapper bg-black">
+    <header class="site-header bg-black">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-          <a class="navbar-brand" href="index.php">Unspoken Puzzle</a>
+          <a class="navbar-brand fst-young-serif" href="index.php"><img src="./assets/images/logo.png" alt="Logo" style="width: 80px"> Unspoken Puzzle</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -64,6 +64,21 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item pe-3">
                 <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+              </li>
+              <li class="nav-item pe-3">
+                <a class="nav-link" aria-current="page" href="about.php">About</a>
+              </li>
+              <li class="nav-item pe-3">
+                <a class="nav-link" aria-current="page" href="index.php">Books</a>
+              </li>
+              <li class="nav-item pe-3">
+                <a class="nav-link" aria-current="page" href="index.php">News</a>
+              </li>
+              <li class="nav-item pe-3">
+                <a class="nav-link" aria-current="page" href="index.php">Contact</a>
+              </li>
+              <li class="nav-item pe-3">
+                <a class="nav-link" aria-current="page" href="index.php">Shop</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -118,11 +133,11 @@
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $book["id"]?>" aria-expanded="false" aria-controls="flush-collapseOne">
                             Synopsis
                           </button>
                         </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div id="flush-collapse<?= $book["id"]?>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                           <div class="accordion-body"><?= $book["description"] ?></div>
                         </div>
                       </div>

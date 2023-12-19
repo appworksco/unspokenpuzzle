@@ -1,6 +1,6 @@
 <?php
 
-  include('../layout/header.php');
+  include('../layout/dashboard-header.php');
 
   $userId = 0;
   if (isset($_SESSION["user_id"])) {
@@ -48,6 +48,11 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
+          </ul>
+          <p class="ms-4 mt-4 text-light">Settings</p>
+          <ul id="sidebarnav">
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="banner.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Banner</span></a></li>
           </ul>
         </nav>
       </div>
@@ -82,7 +87,7 @@
               <div class="row">
                 <div class="col-lg-9">
                   <div class="flot-chart">
-                    <div class="flot-chart-content" id="flot-line-chart"></div>
+                    <!-- <div class="flot-chart-content" id="flot-line-chart"></div> -->
                   </div>
                 </div>
                 <div class="col-lg-3">
@@ -96,16 +101,9 @@
                     </div>
                     <div class="col-6">
                       <div class="bg-dark p-10 text-white text-center">
-                        <i class="fa fa-plus m-b-5 font-16"></i>
-                        <h5 class="m-b-0 m-t-5">120</h5>
-                        <small class="font-light">New Users</small>
-                      </div>
-                    </div>
-                    <div class="col-6 m-t-15">
-                      <div class="bg-dark p-10 text-white text-center">
                         <i class="fa fa-cart-plus m-b-5 font-16"></i>
                         <h5 class="m-b-0 m-t-5">656</h5>
-                        <small class="font-light">Total Shop</small>
+                        <small class="font-light">Total Books</small>
                       </div>
                     </div>
                     <div class="col-6 m-t-15">
@@ -113,20 +111,6 @@
                         <i class="fa fa-tag m-b-5 font-16"></i>
                         <h5 class="m-b-0 m-t-5">9540</h5>
                         <small class="font-light">Total Orders</small>
-                      </div>
-                    </div>
-                    <div class="col-6 m-t-15">
-                      <div class="bg-dark p-10 text-white text-center">
-                        <i class="fa fa-table m-b-5 font-16"></i>
-                        <h5 class="m-b-0 m-t-5">100</h5>
-                        <small class="font-light">Pending Orders</small>
-                      </div>
-                    </div>
-                    <div class="col-6 m-t-15">
-                      <div class="bg-dark p-10 text-white text-center">
-                        <i class="fa fa-globe m-b-5 font-16"></i>
-                        <h5 class="m-b-0 m-t-5">8540</h5>
-                        <small class="font-light">Online Orders</small>
                       </div>
                     </div>
                   </div>
@@ -146,5 +130,5 @@
   </div>
 
 <?php
-  include('../layout/footer.php');
+  include('../layout/dashboard-footer.php');
 ?>

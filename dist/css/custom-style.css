@@ -1,10 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Cormorant+Garamond&family=Quintessential&family=Young+Serif&display=swap');
+
+
+/* font-family: 'Berkshire Swash', serif;
+font-family: 'Cormorant Garamond', serif;
+font-family: 'Quintessential', serif;
+font-family: 'Young Serif', serif; */
+
+.fst-berkshire {
+    font-family: 'Berkshire Swash', serif;
+}
+.fst-cormorant {
+    font-family: 'Cormorant Garamond', serif;  
+}
+.fst-quintessential {
+    font-family: 'Quintessential', serif; 
+}
+.fst-young-serif {
+    font-family: 'Young Serif', serif;    
+}
+
+.text-justify {
+    text-align: justify;
+}
+
 body {
     background-image: url('../.././assets/images/bg-1.jpg') !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
+}
+
+.navbar-nav .nav-item {
+    font-family: 'Young Serif', serif; 
 }
 .bg-space {
     background-color: #333;
@@ -16,19 +48,7 @@ body {
 .bg-custom-dark {
     background-color: #333 !important;
 }
-.site-hero {
-    background-image:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url('../.././assets/images/banner.png');
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: calc(100vh - 300px);
-}
+
 @media (max-width: 575.98px) {
-    .site-hero {
-        height: calc(100vh - 250px);
-    }
+
 }

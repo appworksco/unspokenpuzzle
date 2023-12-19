@@ -2,7 +2,7 @@
 
   include('../db/connector.php');
   include('../models/user-facade.php');
-  include('../layout/header.php');
+  include('../layout/dashboard-header.php');
 
   $userFacade = new UserFacade;
 
@@ -57,6 +57,11 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
+          </ul>
+          <p class="ms-4 mt-4 text-light">Settings</p>
+          <ul id="sidebarnav">
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="banner.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Banner</span></a></li>
           </ul>
         </nav>
       </div>
@@ -128,5 +133,5 @@
   </div>
 
 <?php
-    include('../layout/footer.php');
+    include('../layout/dashboard-footer.php');
 ?>

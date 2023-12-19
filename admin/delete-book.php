@@ -2,7 +2,7 @@
 
   include('../db/connector.php');
   include('../models/book-facade.php');
-  include('../layout/header.php');
+  include('../layout/dashboard-header.php');
 
   $bookFacade = new BookFacade;
 
