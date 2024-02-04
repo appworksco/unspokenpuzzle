@@ -1,10 +1,10 @@
 <?php
 
   include('../db/connector.php');
-  include('../models/user-facade.php');
+  include('../models/book-facade.php');
   include('../layout/dashboard-header.php');
 
-  $userFacade = new UserFacade;
+  $bookFacade = new BookFacade;
 
   $userId = 0;
   if (isset($_SESSION["user_id"])) {
@@ -13,24 +13,15 @@
   if (isset($_SESSION["full_name"])) {
     $fullName = $_SESSION["full_name"];
   }
-  if (isset($_GET["user_id"])) {
-    $userId = $_GET["user_id"];
-  }
   if ($userId == 0) {
     header('Location: ../login.php');
   }
 
-  if (isset($_POST["update_wallet"])) {
-    $userId = $_POST["user_id"];
-    $amount = $_POST["amount"];
-
-    if (empty($amount)) {
-      array_push($invalid, "Amount should not be empty!");
-    } else {
-      $updateWallet = $userFacade->updateWallet($userId, $amount);
-      if ($updateWallet) {
-        header("Location: users.php?msg=Wallet has been updated successfully!");
-      }
+  if (isset($_POST["update_banner"])) {
+    $bookId = $_POST["book_id"];
+    $updateParallaxThree = $bookFacade->updateParallaxThree($bookId);
+    if ($updateParallaxThree) {
+      array_push($success, 'Banner has been updated successfully!');
     }
   }
 ?>
@@ -80,13 +71,13 @@
       <div class="page-breadcrumb">
       <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-          <h4 class="page-title">Update Wallet</h4>
+          <h4 class="page-title">Update Banner 3</h4>
           <div class="ml-auto text-right">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item">Users</li>
-                <li class="breadcrumb-item active" aria-current="page">Update Wallet</li>
+                <li class="breadcrumb-item">Banner</li>
+                <li class="breadcrumb-item active" aria-current="page">Update Banner</li>
               </ol>
             </nav>
           </div>
@@ -97,23 +88,25 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
-            <form class="form-horizontal" action="update-wallet.php" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="update-banner-3.php" method="post" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="d-flex justify-content-between py-3">
                   <h4 class="card-title">Information</h4>
                 </div>
                 <?php include('../errors.php'); ?>
                 <div class="form-group row">
-                  <label for="amount" class="col-sm-2 text-right control-label col-form-label">Amount</label>
-                  <div class="col-sm-10">
-                    <input type="hidden" value="<?= $userId ?>" name="user_id">
-                    <input type="number" class="form-control" id="amount" placeholder="Amount Here" name="amount">
-                  </div>
+                  <select class="form-select" name="book_id" id="bookId">
+                  <?php 
+                    $books = $bookFacade->fetchBooks();
+                    foreach($books as $book) { ?>
+                      <option value="<?= $book["id"] ?>"><?= $book["book_name"] ?></option>
+                  <?php } ?>
+                  </select>
                 </div>
               </div>
               <div class="border-top">
                 <div class="card-body">
-                  <button type="submit" class="btn btn-primary" name="update_wallet">Submit</button>
+                  <button type="submit" class="btn btn-primary" name="update_banner">Update</button>
                 </div>
               </div>
             </form>

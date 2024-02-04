@@ -22,7 +22,7 @@
     $chapter = $_GET["chapter"];
   }
   if ($userId == 0) {
-    header('Location: login.php');
+    header('Location: ../login.php');
   }
 
   if (isset($_POST["update_chapter"])) {
@@ -80,7 +80,6 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
           </ul>
           <p class="ms-4 mt-4 text-light">Settings</p>
           <ul id="sidebarnav">

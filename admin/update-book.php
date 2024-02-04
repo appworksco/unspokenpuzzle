@@ -20,19 +20,36 @@
     $fullName = $_SESSION["full_name"];
   }
   if ($userId == 0) {
-    header('Location: login.php');
+    header('Location: ../login.php');
   }
 
   if (isset($_POST["update"])) {
     $bookId = $_POST["book_id"];
+    $file = $_FILES["book_image"];
+		$fileName = $_FILES["book_image"]["name"];
+		$fileTmpName = $_FILES["book_image"]["tmp_name"];
+		$fileSize = $_FILES["book_image"]["size"];
+		$fileError = $_FILES["book_image"]["error"];
+		$fileType = $_FILES["book_image"]["type"];
+		$fileExt = explode('.', $fileName);
+		$fileActualExt = strtolower(end($fileExt));
+		$allowed = array('jpg', 'jpeg', 'png');
     $bookName = $_POST["book_name"];
     $description = $_POST["description"];
     $price = $_POST["price"];
 
-      $updateBook = $bookFacade->updateBook($bookId, $bookName, $description, $price);
+    if ($fileSize > 5000) {
+      $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+      $fileDestination = '../assets/book-images/' . $fileNameNew;
+      move_uploaded_file($fileTmpName, $fileDestination);
+      // Insert Data To Database
+      $bookImage = './assets/book-images/' . $fileNameNew;
+      $updateBook = $bookFacade->updateBook($bookId, $bookImage, $bookName, $description, $price);
       if ($updateBook) {
         header("Location: books.php");
       }
+    }
+    
     }
 
 ?>
@@ -70,7 +87,6 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
           </ul>
           <p class="ms-4 mt-4 text-light">Settings</p>
           <ul id="sidebarnav">
@@ -108,6 +124,12 @@
                 <?php include('../errors.php');
                 $fetchUBookById = $bookFacade->fetchBookById($bookId) ;
                 while ($row = $fetchUBookById->fetch(PDO::FETCH_ASSOC)) { ?>
+                <div class="form-group row">
+                  <label for="bookImage" class="col-sm-2 text-right control-label col-form-label">Book Image</label>
+                  <div class="col-sm-10">
+                    <input type="file" class="form-control" id="bookI mage" name="book_image">
+                  </div>
+                </div>
                 <div class="form-group row">
                   <label for="bookName" class="col-sm-2 text-right control-label col-form-label">Book Name</label>
                   <div class="col-sm-10">

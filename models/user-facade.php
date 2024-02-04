@@ -21,6 +21,13 @@
       return $count;
     }
 
+    public function fetchNumberOfUsers() {
+      $sql = $this->connect()->prepare("SELECT * FROM users");
+      $sql->execute();
+      $count = $sql->rowCount();
+      return $count;
+    } 
+
     public function register($userType, $email, $fullName, $username, $password) {
       $sql = $this->connect()->prepare("INSERT INTO users(user_type, email, full_name, username, password) VALUES (?, ?, ?, ?, ?)");
       $sql->execute([$userType, $email, $fullName, $username, $password]);

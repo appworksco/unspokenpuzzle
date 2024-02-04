@@ -1,10 +1,10 @@
 <?php
 
   include('../db/connector.php');
-  include('../models/banner-facade.php');
+  include('../models/book-facade.php');
   include('../layout/dashboard-header.php');
 
-  $bannerFacade = new BannerFacade;
+  $bookFacade = new BookFacade;
 
   $userId = 0;
   if (isset($_SESSION["user_id"])) {
@@ -14,44 +14,16 @@
     $fullName = $_SESSION["full_name"];
   }
   if ($userId == 0) {
-    header('Location: login.php');
+    header('Location: ../login.php');
   }
 
   if (isset($_POST["update_banner"])) {
-    $file = $_FILES["book_image"];
-		$fileName = $_FILES["book_image"]["name"];
-		$fileTmpName = $_FILES["book_image"]["tmp_name"];
-		$fileSize = $_FILES["book_image"]["size"];
-		$fileError = $_FILES["book_image"]["error"];
-		$fileType = $_FILES["book_image"]["type"];
-		$fileExt = explode('.', $fileName);
-		$fileActualExt = strtolower(end($fileExt));
-		$allowed = array('jpg', 'jpeg', 'png');
-
-    if (empty($fileTmpName)) {
-      array_push($invalid, "Banner image should not be empty!");
-    } else {
-				if (in_array($fileActualExt, $allowed)) {
-					if ($fileSize > 5000) {
-						$fileNameNew = uniqid('', true) . "." . $fileActualExt;
-						$fileDestination = '../assets/images/' . $fileNameNew;
-						move_uploaded_file($fileTmpName, $fileDestination);
-						// Insert Data To Database
-						$bannerImage = './assets/images/' . $fileNameNew;
-            $updateBanner = $bannerFacade->updateBanner($bannerImage);
-						if ($updateBanner) {
-							array_push($success, "Banner added successfully!");
-						} else {
-							array_push($invalid, "Banner not added!");
-						}
-					} else {
-						array_push($invalid, "File size should not exceed 5MB!");
-					}
-				} else {
-					array_push($invalid, "File type is not supported!");
-				}
-			}
+    $bookId = $_POST["book_id"];
+    $updateParallaxOne = $bookFacade->updateParallaxOne($bookId);
+    if ($updateParallaxOne) {
+      array_push($success, 'Banner has been updated successfully!');
     }
+  }
 ?>
 
   <div class="preloader">
@@ -87,7 +59,6 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
           </ul>
           <p class="ms-4 mt-4 text-light">Settings</p>
           <ul id="sidebarnav">
@@ -100,7 +71,7 @@
       <div class="page-breadcrumb">
       <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-          <h4 class="page-title">Update Book</h4>
+          <h4 class="page-title">Update Banner 1</h4>
           <div class="ml-auto text-right">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
@@ -117,17 +88,20 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
-            <form class="form-horizontal" action="update-banner.php" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="update-banner-1.php" method="post" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="d-flex justify-content-between py-3">
                   <h4 class="card-title">Information</h4>
                 </div>
                 <?php include('../errors.php'); ?>
                 <div class="form-group row">
-                  <label for="bookImage" class="col-sm-2 text-right control-label col-form-label">Banner Image</label>
-                  <div class="col-sm-10">
-                    <input type="file" class="form-control" id="bookImage" name="book_image">
-                  </div>
+                  <select class="form-select" name="book_id" id="bookId">
+                  <?php 
+                    $books = $bookFacade->fetchBooks();
+                    foreach($books as $book) { ?>
+                      <option value="<?= $book["id"] ?>"><?= $book["book_name"] ?></option>
+                  <?php } ?>
+                  </select>
                 </div>
               </div>
               <div class="border-top">

@@ -3,10 +3,12 @@
   include('../db/connector.php');
   include('../models/user-facade.php');
   include('../models/banner-facade.php');
+  include('../models/book-facade.php');
   include('../layout/dashboard-header.php');
 
   $userFacade = new UserFacade;
   $bannerFacade = new BannerFacade;
+  $bookFacade = new BookFacade;
 
   if (isset($_GET["msg"])) {
     $msg = $_GET["msg"];
@@ -21,7 +23,7 @@
     $fullName = $_SESSION["full_name"];
   }
   if ($userId == 0) {
-    header('Location: login.php');
+    header('Location: ../login.php');
   }
 
 ?>
@@ -59,7 +61,6 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
           </ul>
           <p class="ms-4 mt-4 text-light">Settings</p>
           <ul id="sidebarnav">
@@ -90,11 +91,11 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between py-3">
-                <h4 class="card-title">Information</h4>
+                <h4 class="card-title">Parallax 1</h4>
               </div>
               <?php include('../errors.php'); ?>
               <div class="table-responsive">
-                <table id="zero_config" class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
                       <th>Banner</th>
@@ -102,16 +103,94 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-                    $banners = $bannerFacade->fetchBanner()->fetchAll();
-                    foreach($banners as $banner) { ?>
+                  <?php
+                  $books = $bookFacade->fetchParallaxOne()->fetchAll();
+                  foreach($books as $book) { 
+                    $bookId = $book['book_id'];
+                    $fetchBooks = $bookFacade->fetchBookById($bookId); 
+                    foreach($fetchBooks as $fetchBook) {  
+                  ?>
                     <tr>
-                      <td><?= $banner["banner_image"] ?></td>
+                    <td><img src="<?= '../' . $fetchBook["book_image"] ?>" alt="Book Image" style="height: 100px"></td>
                       <td>
-                        <a href="update-banner.php?banner_id=<?= $banner["id"] ?>" class="btn btn-primary">Update</a>
+                        <a href="update-banner-1.php?banner_id=<?= $fetchBook["id"] ?>" class="btn btn-primary">Update</a>
                       </td>
                     </tr>
-                    <?php } ?>
+                  <?php } } ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between py-3">
+                <h4 class="card-title">Parallax 2</h4>
+              </div>
+              <?php include('../errors.php'); ?>
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Banner</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                  $books = $bookFacade->fetchParallaxTwo()->fetchAll();
+                  foreach($books as $book) { 
+                    $bookId = $book['book_id'];
+                    $fetchBooks = $bookFacade->fetchBookById($bookId); 
+                    foreach($fetchBooks as $fetchBook) {  
+                  ?>
+                    <tr>
+                    <td><img src="<?= '../' . $fetchBook["book_image"] ?>" alt="Book Image" style="height: 100px"></td>
+                      <td>
+                        <a href="update-banner-2.php?banner_id=<?= $fetchBook["id"] ?>" class="btn btn-primary">Update</a>
+                      </td>
+                    </tr>
+                  <?php } } ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between py-3">
+                <h4 class="card-title">Parallax 3</h4>
+              </div>
+              <?php include('../errors.php'); ?>
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Banner</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                  $books = $bookFacade->fetchParallaxThree()->fetchAll();
+                  foreach($books as $book) { 
+                    $bookId = $book['book_id'];
+                    $fetchBooks = $bookFacade->fetchBookById($bookId); 
+                    foreach($fetchBooks as $fetchBook) {  
+                  ?>
+                    <tr>
+                    <td><img src="<?= '../' . $fetchBook["book_image"] ?>" alt="Book Image" style="height: 100px"></td>
+                      <td>
+                        <a href="update-banner-3.php?banner_id=<?= $fetchBook["id"] ?>" class="btn btn-primary">Update</a>
+                      </td>
+                    </tr>
+                  <?php } } ?>
                   </tbody>
                 </table>
               </div>

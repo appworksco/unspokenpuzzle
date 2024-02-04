@@ -23,6 +23,9 @@
     $(document).ready(function(){
 		$('#zero_config').DataTable(); 
 	}); 
+	$(document).ready(function(){
+		$('.table').DataTable(); 
+	}); 
 	</script>
 </body>
 </html>

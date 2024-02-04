@@ -15,8 +15,11 @@
   if (isset($_SESSION["full_name"])) {
     $fullName = $_SESSION["full_name"];
   }
+  if (isset($_GET["book_id"])) {
+    $bookId = $_GET["book_id"];
+  }
   if ($userId == 0) {
-    header('Location: login.php');
+    header('Location: ../login.php');
   }
 
   if (isset($_POST["add_chapter"])) {
@@ -37,12 +40,12 @@
       if ($verifyChapter < 1) {
         $addChapter = $chapterFacade->addChapter($bookId, $chapter, $content);
         if ($addChapter) {
-          array_push($success, "Chapter added successfully!");
+          header("Location: books.php?msg=Chapter added successfully!");
         } else {
-          array_push($invalid, "Chapter not added!");
+          header("Location: books.php?msg=Chapter not added!");
         }
       } else {
-        array_push($invalid, "Chapter already exist!");
+        header("Location: books.php?msg=Chapter already exist!");
       }
     }
   }
@@ -81,7 +84,6 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
           </ul>
           <p class="ms-4 mt-4 text-light">Settings</p>
           <ul id="sidebarnav">
@@ -117,18 +119,7 @@
                   <h4 class="card-title">Information</h4>
                 </div>
                 <?php include('../errors.php'); ?>
-                <div class="form-group row">
-                  <label for="bookId" class="col-sm-2 text-right control-label col-form-label">Book Name</label>
-                  <div class="col-sm-10">
-                    <select class="form-select" name="book_id" id="bookId">
-                    <?php 
-                      $books = $bookFacade->fetchBooks();
-                      foreach($books as $book) { ?>
-                        <option value="<?= $book["id"] ?>"><?= $book["book_name"] ?></option>
-                    <?php } ?>
-                    </select>
-                  </div>
-                </div>
+                <input type="hidden" name="book_id" value="<?= $bookId ?>">
                 <div class="form-group row">
                   <label for="chapter" class="col-sm-2 text-right control-label col-form-label">Chapter</label>
                   <div class="col-sm-10">

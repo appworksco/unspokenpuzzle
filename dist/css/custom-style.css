@@ -52,3 +52,45 @@ body {
 @media (max-width: 575.98px) {
 
 }
+
+.parallax-1 {
+    /* The image used */
+    background-image: url('../.././assets/images/parallax-1.jpg') !important;
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-2 {
+    /* The image used */
+    background-image: url('../.././assets/images/parallax-2.jpg') !important;
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-3 {
+    /* The image used */
+    background-image: url('../.././assets/images/parallax-3.jpg') !important;
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

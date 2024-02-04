@@ -2,9 +2,11 @@
 
   include('../db/connector.php');
   include('../models/book-facade.php');
+  include('../models/chapter-facade.php');
   include('../layout/dashboard-header.php');
 
   $bookFacade = new BookFacade;
+  $chapterFacade = new ChapterFacade;
 
   if (isset($_GET["msg"])) {
     $msg = $_GET["msg"];
@@ -19,7 +21,7 @@
     $fullName = $_SESSION["full_name"];
   }
   if ($userId == 0) {
-    header('Location: login.php');
+    header('Location: ../login.php');
   }
 
 ?>
@@ -57,7 +59,6 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="chapters.php" aria-expanded="false"><i class="mdi mdi-book"></i><span class="hide-menu">Chapters</span></a></li>
           </ul>
           <p class="ms-4 mt-4 text-light">Settings</p>
           <ul id="sidebarnav">
@@ -100,21 +101,46 @@
                       <th>Book Name</th>
                       <th>Description</th>
                       <th>Price</th>
+                      <th>Chapters</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
                     $books = $bookFacade->fetchBooks()->fetchAll();
-                    foreach($books as $book) { ?>
+                    foreach($books as $book) { 
+                      $bookId = $book["id"];  
+                    ?>
                     <tr>
                       <td><img src="<?= '../' . $book["book_image"] ?>" alt="Book Image" style="height: 100px"></td>
                       <td><?= $book["book_name"] ?></td>
                       <td><?= $book["description"] ?></td>
                       <td><?= $book["price"] ?></td>
+                      <td class="w-100">                        
+                        <?php
+                        $chapters = $chapterFacade->fetchChapterByBookId($bookId)->fetchAll();
+                        foreach($chapters as $chapter) { ?>
+                          <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $chapter["chapter"]?>" aria-expanded="false" aria-controls="flush-collapseOne">
+                                  Chapter <?= $chapter["chapter"] ?>
+                                </button>
+                              </h2>
+                              <div id="flush-collapse<?= $chapter["chapter"]?>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                  <a href="update-chapter.php?book_id=<?= $chapter["book_id"] ?>&chapter=<?= $chapter["chapter"] ?>" class="btn btn-info">Update</a>
+                                  <a href="delete-chapter.php?book_id=<?= $chapter["book_id"] ?>&chapter=<?= $chapter["chapter"] ?>" class="btn btn-danger">Delete</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <?php } ?>  
+                      </td>
                       <td>
-                        <a href="update-book.php?book_id=<?= $book["id"] ?>" class="btn btn-info">Update</a>
-                        <a href="delete-book.php?book_id=<?= $book["id"] ?>&book_image=<?= $book["book_image"] ?>" class="btn btn-danger">Delete</a>
+                        <a href="add-chapter.php?book_id=<?= $book["id"] ?>" class="btn btn-primary w-100">Add Chapter</a>
+                        <a href="update-book.php?book_id=<?= $book["id"] ?>" class="btn btn-info w-100">Update</a>
+                        <a href="delete-book.php?book_id=<?= $book["id"] ?>&book_image=<?= $book["book_image"] ?>" class="btn btn-danger w-100">Delete</a>
                       </td>
                     </tr>
                     <?php } ?>

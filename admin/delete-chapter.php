@@ -11,7 +11,7 @@
 		$chapter = $_GET["chapter"];
 		$deleteChapter = $chapterFacade->deleteChapter($bookId, $chapter);
 		if ($deleteChapter) {
-			header("Location: chapters.php?msg=Chapter has been deleted successfully!");
+			header("Location: books.php?msg=Chapter has been deleted successfully!");
 		}
 	}
 

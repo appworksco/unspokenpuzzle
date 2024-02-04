@@ -8,8 +8,15 @@
       return $sql;
     }
 
+    public function fetchNumberOfBooks() {
+      $sql = $this->connect()->prepare("SELECT * FROM books");
+      $sql->execute();
+      $count = $sql->rowCount();
+      return $count;
+    } 
+
     public function fetchNewRelease() {
-      $sql = $this->connect()->prepare("SELECT * FROM books ORDER BY id DESC LIMIT 1");
+      $sql = $this->connect()->prepare("SELECT * FROM books ORDER BY RAND() LIMIT 1");
       $sql->execute();
       return $sql;
     }
@@ -52,27 +59,45 @@
       return $sql;
     }
 
-    public function updateBook($bookId, $bookName, $description, $price) {
-      $sql = $this->connect()->prepare("UPDATE books SET book_name = '$bookName', description = '$description', price = '$price' WHERE id = $bookId");
+    public function updateBook($bookId, $bookImage, $bookName, $description, $price) {
+      $sql = $this->connect()->prepare("UPDATE books SET book_image = '$bookImage', book_name = '$bookName', description = '$description', price = '$price' WHERE id = $bookId");
       $sql->execute();
       return $sql;
     }
 
-    public function isLoggedOut($userId) {
-      $sql = $this->connect()->prepare("UPDATE user SET is_logged_in = 0 WHERE id = $userId");
+    public function fetchParallaxOne() {
+      $sql = $this->connect()->prepare("SELECT * FROM parallax_1 LIMIT 1");
       $sql->execute();
       return $sql;
     }
 
-    public function login($username, $password) {
-      $sql = $this->connect()->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
-      $sql->execute([$username, $password]);
+    public function fetchParallaxTwo() {
+      $sql = $this->connect()->prepare("SELECT * FROM parallax_2 LIMIT 1");
+      $sql->execute();
       return $sql;
     }
 
-    public function addPurchasedBookByUserId($bookFile, $bookImage, $bookName, $description, $price) {
-      $sql = $this->connect()->prepare("INSERT INTO p(book_file, book_image, book_name, description, price) VALUES (?, ?, ?, ?, ?)");
-      $sql->execute([$bookFile, $bookImage, $bookName, $description, $price]);
+    public function fetchParallaxThree() {
+      $sql = $this->connect()->prepare("SELECT * FROM parallax_3 LIMIT 1");
+      $sql->execute();
+      return $sql;
+    }
+
+    public function updateParallaxOne($bookId) {
+      $sql = $this->connect()->prepare("UPDATE parallax_1 SET book_id = '$bookId' WHERE id = 1");
+      $sql->execute();
+      return $sql;
+    }
+
+    public function updateParallaxTwo($bookId) {
+      $sql = $this->connect()->prepare("UPDATE parallax_2 SET book_id = '$bookId' WHERE id = 1");
+      $sql->execute();
+      return $sql;
+    }
+
+    public function updateParallaxThree($bookId) {
+      $sql = $this->connect()->prepare("UPDATE parallax_3 SET book_id = '$bookId' WHERE id = 1");
+      $sql->execute();
       return $sql;
     }
 
