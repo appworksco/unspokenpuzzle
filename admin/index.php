@@ -105,9 +105,10 @@
       <div class="scroll-sidebar">
         <nav class="sidebar-nav">
           <ul id="sidebarnav" class="p-t-30">
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="news.php" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="hide-menu">News</span></a></li>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="shop.php" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Shop</span></a></li>
           </ul>
           <p class="ms-4 mt-4 text-light">Settings</p>
           <ul id="sidebarnav">
@@ -133,66 +134,7 @@
       </div>
     </div>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-md-flex align-items-center">
-                <div>
-                  <h4 class="card-title">Site Analysis</h4>
-                  <h5 class="card-subtitle">Overview of Latest Month</h5>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-9">
-                  <div class="flot-chart">
-                    <canvas id="myChart"></canvas>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="row">
-                    <div class="col-6">
-                      <div class="bg-dark p-10 text-white text-center">
-                        <i class="fa fa-user m-b-5 font-16"></i>
-                        <h5 class="m-b-0 m-t-5"><?= $userFacade->fetchNumberOfUsers() ?></h5>
-                        <small class="font-light">Total Users</small>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="bg-dark p-10 text-white text-center">
-                        <i class="fa fa-book m-b-5 font-16"></i>
-                        <h5 class="m-b-0 m-t-5"><?= $bookFacade->fetchNumberOfBooks() ?></h5>
-                        <small class="font-light">Total Books</small>
-                      </div>
-                    </div>
-                    <div class="col-6 m-t-15">
-                      <div class="bg-dark p-10 text-white text-center">
-                        <i class="fa fa-tag m-b-5 font-16"></i>
-                        <h5 class="m-b-0 m-t-5"><?= $puchasedBookFacade->fetchNumberOfPurchasedBooks() ?></h5>
-                        <small class="font-light">Sold Books</small>
-                      </div>
-                    </div>
-                    <div class="col-6 m-t-15">
-                      <div class="bg-dark p-10 text-white text-center">
-                        <i class="fa fa-tag m-b-5 font-16"></i>
-                        <?php
-                          $books = $puchasedBookFacade->totalSales()->fetchAll();
-                          foreach($books as $book) { ?>
-                            <h5 class="m-b-0 m-t-5"><?= $book["sales"] ?></h5>
-                        <?php } ?>
-                        <small class="font-light">Total Sales</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-          
-      </div>
+
     </div>
     <footer class="footer">
       Powered By: <a href="https://appworksco.com" target="_blank">Appworks Co.</a>.
@@ -202,34 +144,3 @@
 <?php
   include('../layout/dashboard-footer.php');
 ?>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  var ctx = document.getElementById('myChart');
-  var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      datasets: [{
-        label: 'Monthly Sales',
-        data: [<?php echo json_encode($janProductSales) ?>, <?php echo json_encode($febProductSales) ?>, <?php echo json_encode($marProductSales) ?>, <?php echo json_encode($aprProductSales) ?>, <?php echo json_encode($mayProductSales) ?>, <?php echo json_encode($junProductSales) ?>, <?php echo json_encode($julProductSales) ?>, <?php echo json_encode($augProductSales) ?>, <?php echo json_encode($sepProductSales) ?>, <?php echo json_encode($octProductSales) ?>, <?php echo json_encode($novProductSales) ?>, <?php echo json_encode($decProductSales) ?>],
-        backgroundColor: [
-          'rgba(0, 0, 0, 0)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
-      }
-    }
-  });
-</script>
-

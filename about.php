@@ -49,16 +49,16 @@
                     <a class="nav-link" aria-current="page" href="about.php">About</a>
                   </li>
                   <li class="nav-item pe-3">
-                    <a class="nav-link" aria-current="page" href="index.php">Books</a>
+                    <a class="nav-link" aria-current="page" href="books.php">Books</a>
                   </li>
                   <li class="nav-item pe-3">
-                    <a class="nav-link" aria-current="page" href="index.php">News</a>
+                    <a class="nav-link" aria-current="page" href="news.php">News</a>
                   </li>
                   <li class="nav-item pe-3">
-                    <a class="nav-link" aria-current="page" href="index.php">Contact</a>
+                    <a class="nav-link" aria-current="page" href="contacts.php">Contacts</a>
                   </li>
                   <li class="nav-item pe-3">
-                    <a class="nav-link" aria-current="page" href="index.php">Shop</a>
+                    <a class="nav-link" aria-current="page" href="shop.php">Shop</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

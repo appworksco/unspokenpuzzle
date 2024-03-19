@@ -73,13 +73,13 @@
                     <a class="nav-link" aria-current="page" href="about.php">About</a>
                   </li>
                   <li class="nav-item pe-3">
-                    <a class="nav-link" aria-current="page" href="index.php">Books</a>
+                    <a class="nav-link" aria-current="page" href="books.php">Books</a>
                   </li>
                   <li class="nav-item pe-3">
-                    <a class="nav-link" aria-current="page" href="index.php">News</a>
+                    <a class="nav-link" aria-current="page" href="news.php">News</a>
                   </li>
                   <li class="nav-item pe-3">
-                    <a class="nav-link" aria-current="page" href="index.php">Contact</a>
+                    <a class="nav-link" aria-current="page" href="contacts.php">Contacts</a>
                   </li>
                   <li class="nav-item pe-3">
                     <a class="nav-link" aria-current="page" href="index.php">Shop</a>

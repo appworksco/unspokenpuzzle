@@ -21,6 +21,13 @@
       return $count;
     }
 
+    public function fetchNumberOfChapterByBookId($bookId) {
+      $sql = $this->connect()->prepare("SELECT chapter FROM chapters WHERE book_id = ?");
+      $sql->execute([$bookId]);
+      $count = $sql->rowCount();
+      return $count;
+    }
+
     public function fetchChapterById($bookId, $chapter) {
       $sql = $this->connect()->prepare("SELECT * FROM chapters WHERE book_id = ? AND chapter = ?");
       $sql->execute([$bookId, $chapter]);

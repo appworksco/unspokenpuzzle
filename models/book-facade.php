@@ -8,6 +8,13 @@
       return $sql;
     }
 
+    
+    public function fetchBooksSearch($search) {
+      $sql = $this->connect()->prepare("SELECT * FROM books WHERE book_name LIKE '%$search%'");
+      $sql->execute();
+      return $sql;
+    }
+
     public function fetchNumberOfBooks() {
       $sql = $this->connect()->prepare("SELECT * FROM books");
       $sql->execute();

@@ -39,9 +39,9 @@
     } else {
       $updateChapter = $chapterFacade->updateChapter($bookId, $chapter, $content);
       if ($updateChapter) {
-        header("Location: chapters.php?msg=Chapter has been updated successfully!");
+        header("Location: continue.php?book_id=" . $bookId);
       } else {
-        array_push($invalid, "Chapter not updated!");
+      header("Location: continue.php?book_id=" . $bookId);
       }
     }
   }
@@ -77,7 +77,6 @@
       <div class="scroll-sidebar">
         <nav class="sidebar-nav">
           <ul id="sidebarnav" class="p-t-30">
-            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="users.php" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Users</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="books.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Books</span></a></li>
           </ul>
